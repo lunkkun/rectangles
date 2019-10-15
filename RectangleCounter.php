@@ -14,10 +14,9 @@ class RectangleCounter
 
     function count() : int
     {
-        $current = new Point(0, -1);
-        while ($plus = $this->findNextPlus($current)) {
-            $this->findRectangles($plus);
-            $current = $plus;
+        $point = new Point(0, -1);
+        while ($point = $this->findNextPlus($point)) {
+            $this->findRectangles($point);
         }
 
         return $this->count;
@@ -39,25 +38,25 @@ class RectangleCounter
 
     function findRectangles(Point $topLeft)
     {
-        $top = $topLeft;
-        while ($topRight = $this->findNextCornerHorizontal($top)) {
-            $right = $topRight;
-            while ($bottomRight = $this->findNextCornerVertical($right)) {
-                $left = $topLeft;
-                while ($bottomLeft = $this->findNextCornerVertical($left)) {
-                    $bottom = $bottomLeft;
-                    while ($bottomRight2 = $this->findNextCornerHorizontal($bottom)) {
-                        if ($bottomRight2 == $bottomRight) {
-                            echo "Found one: $topLeft - $bottomRight" . PHP_EOL;
-                            $this->count++;
-                        }
-                        $bottom = $bottomRight2;
-                    }
-                    $left = $bottomLeft;
-                }
-                $right = $bottomRight;
+        $possibleBottomRights = [];
+
+        $topRight = $topLeft;
+        while ($topRight = $this->findNextCornerHorizontal($topRight)) {
+            $bottomRight = $topRight;
+            while ($bottomRight = $this->findNextCornerVertical($bottomRight)) {
+                $possibleBottomRights[] = $bottomRight;
             }
-            $top = $topRight;
+        }
+
+        $bottomLeft = $topLeft;
+        while ($bottomLeft = $this->findNextCornerVertical($bottomLeft)) {
+            $bottomRight = $bottomLeft;
+            while ($bottomRight = $this->findNextCornerHorizontal($bottomRight)) {
+                if (in_array($bottomRight, $possibleBottomRights)) {
+                    echo "Found one: $topLeft - $bottomRight" . PHP_EOL;
+                    $this->count++;
+                }
+            }
         }
     }
 
