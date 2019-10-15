@@ -13,11 +13,6 @@ class Point
         $this->j = $j;
     }
 
-    public function __clone()
-    {
-        return new static($this->i, $this->j);
-    }
-
     public function __toString()
     {
         return "({$this->i}, {$this->j})";
