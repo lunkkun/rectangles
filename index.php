@@ -3,10 +3,10 @@
 require_once("RectangleCounter.php");
 
 $ascii = <<<EOL
-+-++
-+-++--+
-|  |  |
-+--+--+
+-+-++
+ +-++-++|+
+||  |  | |
+ +--+--+-+
 EOL;
 
 $rc = new RectangleCounter($ascii);
