@@ -4,7 +4,7 @@ require_once("Point.php");
 
 class RectangleCounter
 {
-    public $count;
+    public $count = 0;
     public $lines;
 
     function __construct(string $ascii)
@@ -14,29 +14,32 @@ class RectangleCounter
 
     function count() : int
     {
-        $point = new Point(0, -1);
+        $point = null;
         while ($point = $this->findNextPlus($point)) {
-            $this->findRectangles($point);
+            $this->findRectanglesForPoint($point);
         }
 
         return $this->count;
     }
 
-    function findNextPlus(Point $point) : ?Point
+    function findNextPlus(?Point $point = null) : ?Point
     {
-        for ($i = $point->i; $i < count($this->lines); $i++) {
-            $jStart = $i === $point->i ? $point->j + 1 : 0;
+        $iStart = $point ? $point->i : 0;
+        $jStart = $point ? $point->j + 1 : 0;
+
+        for ($i = $iStart; $i < count($this->lines); $i++) {
             for ($j = $jStart; $j < strlen($this->lines[$i]); $j++) {
                 if ($this->lines[$i][$j] === '+') {
                     return new Point($i, $j);
                 }
             }
+            $jStart = 0;
         }
 
         return null;
     }
 
-    function findRectangles(Point $topLeft)
+    function findRectanglesForPoint(Point $topLeft)
     {
         $possibleBottomRights = [];
 
