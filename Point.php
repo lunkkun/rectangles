@@ -12,9 +12,4 @@ class Point
         $this->i = $i;
         $this->j = $j;
     }
-
-    public function __toString()
-    {
-        return "{$this->i}:{$this->j}";
-    }
 }

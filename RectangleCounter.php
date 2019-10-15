@@ -1,15 +1,18 @@
 <?php
 
 require_once("Point.php");
+require_once("Rectangle.php");
 
 class RectangleCounter
 {
-    public $count = 0;
+    /** @var string[] */
     public $lines;
+    /** @var Rectangle[] */
+    public $rectangles = [];
 
     function __construct(string $ascii)
     {
-        $this->lines = explode(PHP_EOL, $ascii);
+        $this->lines = &explode(PHP_EOL, $ascii);
     }
 
     function count() : int
@@ -19,7 +22,7 @@ class RectangleCounter
             $this->findRectanglesForPoint($point);
         }
 
-        return $this->count;
+        return count($this->rectangles);
     }
 
     function findNextPlus(?Point $point = null) : ?Point
@@ -39,7 +42,7 @@ class RectangleCounter
         return null;
     }
 
-    function findRectanglesForPoint(Point $topLeft)
+    function findRectanglesForPoint(Point $topLeft) : void
     {
         $possibleBottomRights = [];
 
@@ -56,8 +59,7 @@ class RectangleCounter
             $bottomRight = $bottomLeft;
             while ($bottomRight = $this->findNextCornerHorizontal($bottomRight)) {
                 if (in_array($bottomRight, $possibleBottomRights)) {
-                    echo "Found one: $topLeft - $bottomRight" . PHP_EOL;
-                    $this->count++;
+                    $this->rectangles[] = new Rectangle($topLeft, $bottomRight, $this->lines);
                 }
             }
         }
