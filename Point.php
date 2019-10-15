@@ -15,6 +15,6 @@ class Point
 
     public function __toString()
     {
-        return "({$this->i}, {$this->j})";
+        return "{$this->i}:{$this->j}";
     }
 }
