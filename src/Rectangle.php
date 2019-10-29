@@ -9,14 +9,14 @@ class Rectangle
     /** @var string[] */
     public $lines;
 
-    function __construct(Point $topLeft, Point $bottomRight, array &$lines)
+    public function __construct(Point $topLeft, Point $bottomRight, array &$lines)
     {
         $this->topLeft = $topLeft;
         $this->bottomRight = $bottomRight;
         $this->lines = &$lines;
     }
 
-    function __toString()
+    public function __toString()
     {
         $string = "";
 

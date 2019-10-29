@@ -2,29 +2,29 @@
 
 namespace Lunkkun\Rectangles;
 
-class RectangleCounter
+class RectangleFinder
 {
     /** @var string[] */
-    public $lines;
+    protected $lines;
     /** @var Rectangle[] */
-    public $rectangles = [];
+    protected $rectangles = [];
 
-    function __construct(string $ascii)
+    public function __construct(string $ascii)
     {
         $this->lines = &explode(PHP_EOL, $ascii);
     }
 
-    function count() : int
+    public function find(): array
     {
         $point = null;
         while ($point = $this->findNextPlus($point)) {
             $this->findRectanglesForPoint($point);
         }
 
-        return count($this->rectangles);
+        return $this->rectangles;
     }
 
-    function findNextPlus(?Point $point = null) : ?Point
+    protected function findNextPlus(?Point $point = null): ?Point
     {
         $iStart = $point ? $point->i : 0;
         $jStart = $point ? $point->j + 1 : 0;
@@ -41,7 +41,7 @@ class RectangleCounter
         return null;
     }
 
-    function findRectanglesForPoint(Point $topLeft) : void
+    protected function findRectanglesForPoint(Point $topLeft): void
     {
         $possibleBottomRights = [];
 
@@ -64,7 +64,7 @@ class RectangleCounter
         }
     }
 
-    function findNextCornerHorizontal(Point $point) : ?Point
+    protected function findNextCornerHorizontal(Point $point): ?Point
     {
         $i = $point->i;
         for ($j = $point->j + 1; $j < strlen($this->lines[$i]); $j++) {
@@ -78,7 +78,7 @@ class RectangleCounter
         return null;
     }
 
-    function findNextCornerVertical(Point $point) : ?Point
+    protected function findNextCornerVertical(Point $point): ?Point
     {
         $j = $point->j;
         for ($i = $point->i + 1; $i < count($this->lines); $i++) {
