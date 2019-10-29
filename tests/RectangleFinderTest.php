@@ -5,9 +5,9 @@ namespace Lunkkun\Rectangles\Tests;
 use Lunkkun\Rectangles\RectangleFinder;
 use PHPUnit\Framework\TestCase;
 
-class RectangleCounterTest extends TestCase
+class RectangleFinderTest extends TestCase
 {
-    public function testCountsRectanglesSimple()
+    public function testFindsRectanglesSimple()
     {
         $ascii = <<<EOL
         +-+
@@ -19,7 +19,7 @@ class RectangleCounterTest extends TestCase
         $this->assertEquals(1, count($finder->find()));
     }
 
-    public function testCountsRectanglesComplex()
+    public function testFindsRectanglesComplex()
     {
         $ascii = <<<EOL
         -+-++
