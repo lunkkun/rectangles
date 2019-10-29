@@ -29,4 +29,9 @@ class Rectangle
 
         return $string;
     }
+
+    public function isSquare(): bool
+    {
+        return ($this->bottomRight->i - $this->topLeft->i) === ($this->bottomRight->j - $this->topLeft->j);
+    }
 }
