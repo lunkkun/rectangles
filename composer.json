@@ -1,0 +1,29 @@
+{
+    "name": "lunkkun/rectangles",
+    "description": "Counts the number of rectangles in ASCII art.",
+    "authors": [
+        {
+            "name": "Luuk Linders",
+            "email": "lunkkun@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lunkkun\\Rectangles\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lunkkun\\Rectangles\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}

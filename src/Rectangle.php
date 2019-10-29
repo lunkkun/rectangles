@@ -1,6 +1,6 @@
 <?php
 
-require_once("Point.php");
+namespace Lunkkun\Rectangles;
 
 class Rectangle
 {

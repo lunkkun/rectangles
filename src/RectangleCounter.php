@@ -1,7 +1,6 @@
 <?php
 
-require_once("Point.php");
-require_once("Rectangle.php");
+namespace Lunkkun\Rectangles;
 
 class RectangleCounter
 {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Lunkkun\Rectangles;
+
 class Point
 {
     /** @var int */

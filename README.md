@@ -1,2 +1,3 @@
-# rectangles
-Counts the number of rectangles in ASCII art
+# Rectangles
+
+Counts the number of rectangles in ASCII art.
